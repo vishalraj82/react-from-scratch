@@ -1,29 +1,147 @@
 # React from scratch
 
-With utilities such as [create-react-app](https://npmjs.org/package/create-react-app) and [create-react-library](https://npmjs.org/package/create-react-library), setting up a react project skeleton becomes a childs play.
-But, these utilities hide a lot of nitty gritty under the hood. Of which, a developer must always be aware of.
+With utilities such as [create-react-app](https://npmjs.org/package/create-react-app) and [create-react-library](https://npmjs.org/package/create-react-library), setting up a react project skeleton becomes a childs play. But, these utilities hide a lot of nitty gritty under the hood. Of which, a developer must always be aware of. Hence I created this project, a skeleton for react application, from scratch.
 
 #### Why this repository
 
-This is a sample project for those who want to start with react and want to understand how to setup a react prject from scratch.
+This is a sample project for those who want to start development with react and want to understand how to setup a react project from scratch. This creates a barebones structure from where it can then be taken ahead for development.
 
 #### The project setup, from scratch
 
-To setup the react project, following are the steps
+###### To setup the react project, following are the steps
 
-- Create a directory with the name of the project,  _mkdir react-from-scratch_
-- Move inside the directory - cd _react-from-scratch_
-- Initialize the project with npm - _npm init_
-This will ask few questions, which already have sensible default values. If you want to skip the questions and directly use the default values, then use the command _npm init --yes_
-- Now we need [react](https://npmjs.org/package/react) and [react-dom](https://npmjs.org/package/react-dom) - _npm install --save react react-dom_
-- Next we need some development dependencies which will help us convert our react code into browser understandable code - _npm install --save-dev [@babel/core](https://npmjs.org/package/@babel/core) [@babel/preset-env](https://npmjs.org/package/@babel/preset-env) [@babel/preset-react](https://npmjs.org/package/@babel/preset-react) [babel-loader](https://npmjs.org/package/babel-loader) [webpack](https://npmjs.org/package/webpack) [webpack-cli](https://npmjs.org/package/webpack-cli)_
-Lets understand in brief about the packages that we just installed.
-[@babel/core](https://babeljs.io/docs/en/next/babel-core.html) is basically a transpiler. It takes the modern ES5/6/7 style javascript code and coverts it into simple broswer understandable code.
-[@babel/preset-env](https://babeljs.io/docs/en/next/babel-preset-env) is a smart preset which allows us to use the latest javascript features without having to worry about cross-browser compability and polyfills.
-[@babel/preset-react](https://babeljs.io/docs/en/next/babel-preset-react) allows us to use JSX style code for the components.
-[webpack](https://npmjs.org/package/webpack) is module bundler. In simple terms, it can combine multiple javascript files to produce one or more output files. There are numerous plugins available which greatly enhance the functionality of webpack.
-[webpack-cli](https://npmjs.org/package/webpack-cli) provides set of tools to generate custom webpack configuration file.
-- Create the configuration file to be used by webpack - _./node_modules/bin/webpack-cli init_
-This will ask certain set of questions and based on the choices will create the file _webpack.config.js_ and update the file _package.json_. Additonally it also create directory _src_ and puts a sample code in _src/index.js_
-- Test if the webpack is working fine the generated _webpack.config.js_ - _./node_modules/.bin/webpack_
-- 
+
+- `mkdir react-from-scratch`
+- `cd react-from-scratch`
+- `mkdir src dist`
+- `npm init`
+- `npm install --save react react-dom express`
+- `npm install --save-dev babel-loader @babel/core @babel/preset-env @babel/preset-react webpack webpack-cli`
+- `vim webpack.config.js`
+> Add the following snippet
+```javascript
+const path  = require("path");
+const webpack = require("webpack)'
+
+module.exports = {
+    mode: "development",
+    plugins: [
+        new webpack.ProgressPlugin()
+    ],
+    module: {
+        rules: [
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loader: "babel-loader"
+            }
+        ]
+    }
+};
+```
+- `vim .babelrc`
+> Add the following snippet
+```javascript
+{
+    presets: [
+        "@babel/preset-env",
+        "@babel/preset-react"
+    ]
+}
+```
+- `vim dist/index.html`
+> Add the following snippet
+```javascript
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script src="dist.js"></script>
+    </body>
+</html>
+```
+- `vim src/index.js`
+```javascript
+import React from "react";
+import ReactDOM from "react-dom"
+
+const App = () => {
+    return (
+        <h1>React from scratch</h1>
+    );
+}
+
+ReactDOM.render(<App/>, document.getElementById("root"));
+```
+- `vim src/server.js`
+> Add the following snippet
+```javascript
+const path = require("path");
+const express = require("express");
+const app = express();
+
+app.use(express.static(path.resolve(__dirname, "..", "dist")));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.resolve("..", "dist", "index.html"));
+});
+
+app.listen(3000, () => console.log("Server started on port 3000"));
+```
+- `vim package.json`
+> Add the following snippet, under __"scripts"__
+```javascript
+"server:start":  "node src/server.js",
+"build": "webpack"
+```
+- Open a terminal and run command - `npm run build`
+- Open a terminal and run command - `npm run server:start`
+- Open a browser tab and visit - _http://localhost:3000_
+
+
+#### What have we done
+
+So if you were able to follow the steps to finally get a working page in browser, then you successfully created your react application from scratch. Lets understand about all the steps that we followed.
+
+`mkdir react-from-scratch`
+We created a directory which will be root of the application development
+
+`cd react-from-scratch`
+Of course, we have to move inside the project directory to proceed with the applcation setup
+
+`mkdir src dist`
+We created two directories where the source code and final builds will be stored
+
+`npm install --save react react-dom express`
+We add the packages which are absolute essential and are required to be part of the final build
+
+`npm install --save-dev babel-loader @babel/core @babel/preset-env @babel/preset-react webpack webpack-cli`
+We add the packages which are required only during the development process.
+
+`vim webpack.config.js`
+Next we created a very mininal configuration file for webpack to create final build from source
+
+`vim .babelrc`
+Next we created a very mininal configuration file for babel to parse the source code and produce browser understandable code
+
+`vim dist/index.html`
+Next we created a very minimal HTML file
+
+`vim src/index.js`
+Next we created a very simple react component, which is injected into HTML DOM by ReactDOM
+
+`vim src/server.js`
+Next we created a very basic server using express. We instrcuted express to handle static resource (javscript, css, images etc) from the folder `dist`.
+
+`vim package.json`
+Next we added some command for starting server and created build from source code into `package.json` file
+
+`npm run build`
+Next we used webpack to read the source code from `src` folder, parse it and dump the output in `dist` folder
+
+`npm run server:start`
+Next we started the server, which is listening for incoming connections on port 3000
+
+Finally we browsed the page in browser at [`http://localhost:3000`](http://localhost:3000)
