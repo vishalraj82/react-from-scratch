@@ -16,7 +16,7 @@ This is a sample project for those who want to start development with react and 
 - `mkdir src dist`
 - `npm init`
 - `npm install --save react react-dom express`
-- `npm install --save-dev babel-loader @babel/core @babel/preset-env @babel/preset-react webpack webpack-cli`
+- `npm install --save-dev babel-loader @babel/core @babel/preset-env @babel/preset-react babel-plugin-syntax-dynamic-import css-loader style-loader webpack webpack-cli`
 - `vim webpack.config.js`
 > Add the following snippet
 ```javascript
@@ -76,6 +76,17 @@ const App = () => {
 
 ReactDOM.render(<App/>, document.getElementById("root"));
 ```
+- `vim src/index.css`
+> Add the following snippet
+```javascript
+h1 {
+    background-color: #B2BABB;
+    color: #76D7C4;
+    font-weight: bold;
+    text-decoration: underline;
+    font-family: "Lucida Console", Courier, monospace;
+}
+```
 - `vim src/server.js`
 > Add the following snippet
 ```javascript
@@ -118,7 +129,7 @@ We created two directories where the source code and final builds will be stored
 `npm install --save react react-dom express`
 We add the packages which are absolute essential and are required to be part of the final build
 
-`npm install --save-dev babel-loader @babel/core @babel/preset-env @babel/preset-react webpack webpack-cli`
+`npm install --save-dev babel-loader @babel/core @babel/preset-env @babel/preset-react babel-plugin-syntax-dynamic-import css-loader style-loader webpack webpack-cli`
 We add the packages which are required only during the development process.
 
 `vim webpack.config.js`
