@@ -10,4 +10,6 @@ app.get("/", (req, res) => {
     res.status(20).sendFile(path.resolve(__dirname, "..", "dist", "index.html"));
 });
 
-app.listen(3000);
+const port = process.env.PORT || 4000;
+
+app.listen(port);

@@ -2,13 +2,13 @@
 
 With utilities such as [create-react-app](https://npmjs.org/package/create-react-app) and [create-react-library](https://npmjs.org/package/create-react-library), setting up a react project skeleton becomes a childs play. But, these utilities hide a lot of nitty gritty under the hood. Of which, a developer must always be aware of. Hence I created this project, a skeleton for react application, from scratch.
 
-#### Why this repository
+### Why this repository
 
 This is a sample project for those who want to start development with react and want to understand how to setup a react project from scratch. This creates a barebones structure from where it can then be taken ahead for development.
 
-#### The project setup, from scratch
+### The project setup, from scratch
 
-###### To setup the react project, following are the steps
+##### To setup the react project, following are the steps
 
 
 - `mkdir react-from-scratch`
@@ -65,7 +65,8 @@ module.exports = {
 - `vim src/index.js`
 ```javascript
 import React from "react";
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom";
+import "./index.css";
 
 const App = () => {
     return (
@@ -101,7 +102,7 @@ app.listen(3000, () => console.log("Server started on port 3000"));
 - Open a browser tab and visit - _http://localhost:3000_
 
 
-#### What have we done
+### What have we done
 
 So if you were able to follow the steps to finally get a working page in browser, then you successfully created your react application from scratch. Lets understand about all the steps that we followed.
 
