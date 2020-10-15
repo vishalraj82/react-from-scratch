@@ -1,11 +1,12 @@
 {
-  "name": "my-webpack-project",
+  "name": "react-from-scratch",
   "version": "1.0.0",
-  "description": "My webpack project",
-  "main": "index.js",
+  "description": "React from scratch",
+  "main": "src/index.js",
   "scripts": {
     "test": "npm run test",
-    "build": "webpack"
+    "build": "webpack",
+    "server:start": "node src/server.js"
   },
   "repository": {
     "type": "git",
