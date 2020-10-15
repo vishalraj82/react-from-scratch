@@ -20,24 +20,34 @@ This is a sample project for those who want to start development with react and 
 - `vim webpack.config.js`
 > Add the following snippet
 ```javascript
-const path  = require("path");
-const webpack = require("webpack)'
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-    mode: "development",
-    plugins: [
-        new webpack.ProgressPlugin()
-    ],
+    mode: 'development',
+    plugins: [new webpack.ProgressPlugin()],
+    entry: path.resolve(__dirname, "src", "index.js"),
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        filename: "main.js",
+    },
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                loader: "babel-loader"
+                test: /\.(js|jsx)$/,
+                include: [path.resolve(__dirname, 'src')],
+                loader: 'babel-loader'
+            },
+            {
+                test: /.css$/,
+                use: [
+                    { loader: "style-loader" },
+                    { loader: "css-loader"}
+                ]
             }
         ]
     }
-};
+}
 ```
 - `vim .babelrc`
 > Add the following snippet
@@ -145,19 +155,19 @@ We add the packages which are required only during the development process. Lets
 `webpack-cli` - webpack CLI provides a flexible set of commands for developers to increase speed when setting up a custom webpack project. As of webpack v4, webpack is not expecting a configuration file, but often developers want to create a more custom webpack configuration based on their use-cases and needs. webpack CLI addresses these needs by providing a set of tools to improve the setup of custom webpack configuration.
 
 `vim webpack.config.js`
-Next we created a very mininal configuration file for webpack to create final build from source.
+Next we created a very mininal configuration file for webpack to create final build from source. Here we are specifying that webpack should start scanning the `src/index.js` file and the follow the chain of imports / requires to get the full source code. Additionally, since we are using modern javascript features and JSX syntax so we instructed webpack on how to treat files with `js` and `css` extensions.
 
 `vim .babelrc`
-Next we created a very mininal configuration file for babel to parse the source code and produce browser understandable code.
+Next we created a very mininal configuration file for babel to parse the source code and produce browser understandable code. Here  we specify that babel should use preset-env for modern browser features and preset-react for parsing of JSX
 
 `vim dist/index.html`
-Next we created a very minimal HTML file.
+Next we created a very minimal HTML file. This is our base HTML file which will be served to users browsing our application.
 
 `vim src/index.js`
 Next we created a very simple react component, which is injected into HTML DOM by ReactDOM
 
 `vim src/server.js`
-Next we created a very basic server using express. We instrcuted express to handle static resource (javscript, css, images etc) from the folder `dist`.
+Next we created a very basic application server using express. We instrcuted express to handle static resource (javscript, css, images etc) from the folder `dist`. The default route "/" will respond with the HTML file.
 
 `vim package.json`
 Next we added some command for starting server and created build from source code into `package.json` file.

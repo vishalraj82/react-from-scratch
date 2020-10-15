@@ -4,6 +4,11 @@ const webpack = require('webpack');
 module.exports = {
     mode: 'development',
     plugins: [new webpack.ProgressPlugin()],
+    entry: path.resolve(__dirname, "src", "index.js"),
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        filename: "main.js",
+    },
     module: {
         rules: [
             {
@@ -15,7 +20,8 @@ module.exports = {
                 test: /.css$/,
                 use: [
                     { loader: "style-loader" },
-                    { loader: "css-loader", options: { sourceMap: true }}]
+                    { loader: "css-loader",}
+                ]
             }
         ]
     }
