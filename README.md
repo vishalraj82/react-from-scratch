@@ -102,15 +102,19 @@ h1 {
 ```javascript
 const path = require("path");
 const express = require("express");
+
 const app = express();
 
-app.use(express.static(path.resolve(__dirname, "..", "dist")));
+app.use(express.static(path.join(__dirname, "..", "dist")));
 
 app.get("/", (req, res) => {
-    res.sendFile(path.resolve("..", "dist", "index.html"));
+    res.setHeader("content-type", "text/html");
+    res.status(20).sendFile(path.resolve(__dirname, "..", "dist", "index.html"));
 });
 
-app.listen(3000, () => console.log("Server started on port 3000"));
+const port = process.env.PORT || 4000;
+
+app.listen(port);
 ```
 - `vim package.json`
 > Add the following snippet, under __"scripts"__
