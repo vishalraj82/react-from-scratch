@@ -7,7 +7,7 @@ app.use(express.static(path.join(__dirname, "..", "dist")));
 
 app.get("/", (req, res) => {
     res.setHeader("content-type", "text/html");
-    res.status(20).sendFile(path.resolve(__dirname, "..", "dist", "index.html"));
+    res.status(200).sendFile(path.resolve(__dirname, "..", "dist", "index.html"));
 });
 
 const port = process.env.PORT || 4000;
