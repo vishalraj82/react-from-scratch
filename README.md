@@ -166,5 +166,5 @@ Next we started the server, which is listening for incoming connections on port 
 - Open a browser tab and visit - _http://localhost:4000_
 
 
-So if you were able to follow the steps to finally get a working page in browser, then you successfully created your react application from scratch. Lets understand about all the steps that we followed.
+So if you were able to follow the steps to finally get a working page in browser, then you successfully created your react application from scratch. Hope you have enjoyed this!
 
