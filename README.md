@@ -40,8 +40,8 @@ We add the packages which are required only during the development process. Lets
     + `webpack` - webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.
     + `webpack-cli` - webpack CLI provides a flexible set of commands for developers to increase speed when setting up a custom webpack project. As of webpack v4, webpack is not expecting a configuration file, but often developers want to create a more custom webpack configuration based on their use-cases and needs. webpack CLI addresses these needs by providing a set of tools to improve the setup of custom webpack configuration.
 
-- `vim webpack.config.js`
-> Add the following snippet
+- Create file `webpack.config.js` and Add the following snippet
+
 ```javascript
 const path = require('path');
 const webpack = require('webpack');
@@ -74,8 +74,8 @@ module.exports = {
 ```
 Next we created a very mininal configuration file for webpack to create final build from source. Here we are specifying that webpack should start scanning the `src/index.js` file and the follow the chain of imports / requires to get the full source code. Additionally, since we are using modern javascript features and JSX syntax so we instructed webpack on how to treat files with `js` and `css` extensions.
 
-- `vim .babelrc`
-> Add the following snippet
+- Create file `.babelrc` and add the following snippet
+
 ```javascript
 {
     presets: [
@@ -86,8 +86,8 @@ Next we created a very mininal configuration file for webpack to create final bu
 ```
 Next we created a very mininal configuration file for babel to parse the source code and produce browser understandable code. Here  we specify that babel should use preset-env for modern browser features and preset-react for parsing of JSX.
 
-- `vim dist/index.html`
-> Add the following snippet
+- Create file `dist/index.html` and add the following snippet
+
 ```javascript
 <!DOCTYPE html>
 <html>
@@ -101,7 +101,8 @@ Next we created a very mininal configuration file for babel to parse the source 
 ```
 Next we created a very minimal HTML file. This is our base HTML file which will be served to users browsing our application.
 
-- `vim src/index.js`
+- Create file `src/index.js` and add the following snippet
+
 ```javascript
 import React from "react";
 import ReactDOM from "react-dom";
@@ -117,8 +118,8 @@ ReactDOM.render(<App/>, document.getElementById("root"));
 ```
 Next we created a very simple react component, which is injected into HTML DOM by ReactDOM.
 
-- `vim src/index.css`
-> Add the following snippet
+- Create file `src/index.css` and add the following snippet
+
 ```javascript
 h1 {
     background-color: #B2BABB;
@@ -128,8 +129,8 @@ h1 {
     font-family: "Lucida Console", Courier, monospace;
 }
 ```
-- `vim src/server.js`
-> Add the following snippet
+- Create file `src/server.js` and add the following snippet
+
 ```javascript
 const path = require("path");
 const express = require("express");
@@ -149,8 +150,8 @@ app.listen(port);
 ```
 Next we created a very basic application server using express. We instrcuted express to handle static resource (javscript, css, images etc) from the folder `dist`. The default route "/" will respond with the HTML file.
 
-- `vim package.json`
-> Add the following snippet, under the key _"scripts"_
+- Edit file `package.json` and add the following snippet, under the key _"scripts"_
+
 ```javascript
 "server:start":  "node src/server.js",
 "build": "webpack"
